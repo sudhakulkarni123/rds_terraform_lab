@@ -1,3 +1,10 @@
+resource "aws_db_subnet_group" "db_subnet_group" {
+  name       = "database_subnet"
+  subnet_ids = [data.aws_subnet.private.id, data.aws_subnet.data.id]
+  tags = {
+    Name = "My DB subnet group"
+  }
+}
 #create a MYSQL RDS instance
 resource "aws_db_instance" "demo-mysql-db" {
     identifier = "mysqldatabse"
@@ -6,7 +13,7 @@ resource "aws_db_instance" "demo-mysql-db" {
     engine_version = "8.0"
     instance_class = "db.t3.micro"
     port =  "3306"
-    db_subnet_group_name = "subnet_group"
+    db_subnet_group_name = "database_subnet"
     username = var.username
     password = var.password
     publicly_accessible = false

@@ -6,23 +6,23 @@ data "aws_vpc" "lab_vpc" {
   }
 }
 
-data "aws_subnet" "public" {
+data "aws_subnet" "data_a" {
   filter {
     name   = "tag:Name"
-    values = ["public"]
+    values = ["data-a"]
   }
 }
 
-data "aws_subnet" "private" {
+data "aws_subnet" "data_b" {
   filter {
     name   = "tag:Name"
-    values = ["private"]
+    values = ["data-b"]
   }
 }
 
-data "aws_subnet" "data" {
+data "aws_security_group" "db-sg" {
   filter {
     name   = "tag:Name"
-    values = ["data"]
+    values = ["ansible-server"]
   }
 }

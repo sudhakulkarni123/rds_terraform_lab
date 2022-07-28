@@ -1,10 +1,15 @@
 resource "aws_db_subnet_group" "db_subnet_group" {
   name       = "database_subnet"
-  subnet_ids = [data.aws_subnet.private.id, data.aws_subnet.data.id]
+  subnet_ids = [
+    data.aws_subnet.data_a.id,
+    data.aws_subnet.data_b.id
+  ]
+
   tags = {
     Name = "My DB subnet group"
   }
 }
+
 #create a MYSQL RDS instance
 resource "aws_db_instance" "demo-mysql-db" {
     identifier = "mysqldatabse"
